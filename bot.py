@@ -2,6 +2,7 @@
 import deepl
 import os
 import logging
+import db
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 
@@ -17,7 +18,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Для перевода с английского на русский - просто введите текст")
 
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE): 
-    result = translator.translate_text(update.message.text, source_lang='EN', target_lang='RU') 
+    result = translator.translate_text(update.message.text, source_lang='EN', target_lang='RU')
+    db.insert_into(update.effective_chat.id, update.message.text, result.text)
     await context.bot.send_message(chat_id=update.effective_chat.id, text='Перевод: ' + result.text)
 
 if __name__ == '__main__':
@@ -35,10 +37,12 @@ if __name__ == '__main__':
 
     application = ApplicationBuilder().token(bot_token).build()
     
+    db.create_db()
+
     translate_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), translate)
     start_handler = CommandHandler('start', start)
 
     application.add_handler(start_handler)
     application.add_handler(translate_handler)
-    
+
     application.run_polling()
