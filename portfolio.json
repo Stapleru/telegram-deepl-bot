@@ -1,6 +1,8 @@
 {
-      "displayTitle": "Project Display Name",
-      "shortDescription": "A brief summary for the portfolio card.", 
+      "name_en": "Python Telegram Bot",
+      "description_en": "Simple bot that uses DeepL API to translate text",
+      "name_ru": "Телеграм бот на Python",
+      "description_ru": "Простой бот, который использует DeepL API чтобы переводить сообщения", 
       "imageUrl": "./preview.png", 
       "liveDemoUrl": ""
 }
