@@ -1,0 +1,7 @@
+//For now it's only test data
+{
+      "displayTitle": "Project Display Name",
+      "shortDescription": "A brief summary for the portfolio card.", 
+      "imageUrl": "./preview.png", 
+      "liveDemoUrl": "https://your-live-demo-link.com"
+}
